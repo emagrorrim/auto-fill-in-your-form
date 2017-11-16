@@ -3,23 +3,28 @@
 })();
 
 function fillInRecordedInputs() {
-  let fillIns = _fetchFillIns();
-  fillIns.forEach((data) => _fillInInput(data));
+  let fillIns = _fetchFillIns((fillIns) => {
+    fillIns.forEach((data) => _fillInInput(data));
+  });
 }
 
-function _fetchFillIns() {
-  return [
-    {
-      id: "login-username",
-      class: "search_input",
-      value: "373407641@qq.com"
-    },
-    {
-      id: "login-passwd",
-      class: "search_input",
-      value: "abcdefgh"
-    }
-  ];
+function _fetchFillIns(completion) {
+  chrome.storage.sync.get('test', (items) => {
+    console.log(items['test']);
+    completion(items['test']);
+  });
+  // return [
+  //   {
+  //     id: "login-username",
+  //     class: "search_input",
+  //     value: "373407641@qq.com"
+  //   },
+  //   {
+  //     id: "login-passwd",
+  //     class: "search_input",
+  //     value: "abcdefgh"
+  //   }
+  // ];
 }
 
 function _fillInInput(data) {
