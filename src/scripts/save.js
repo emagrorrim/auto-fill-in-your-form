@@ -12,6 +12,8 @@ function saveFillInsIfNeeded() {
     chrome.storage.sync.set(obj, () => {
       alert('Form Saved!')
     });
+  } else {
+    alert("There is no available text field has value in it, search box and password won't be remember, Sorry for that!");
   }
 }
 
