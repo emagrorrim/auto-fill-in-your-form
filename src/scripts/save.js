@@ -5,8 +5,11 @@
 function saveFillInsIfNeeded() {
   let inputs = _getAllTextInputs();
   let data = _formattedInformation(inputs);
-  if (data != null && data != undefined || data.length != 0) {
-    chrome.storage.sync.set({'test': data}, () => {
+  if (data !== null && data !== undefined && data.length !== 0) {
+    let key = window.location.host + window.location.pathname;
+    let obj = {};
+    obj[key] = data;
+    chrome.storage.sync.set(obj, () => {
       alert('Form Saved!')
     });
   }

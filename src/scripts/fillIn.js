@@ -1,17 +1,18 @@
 (function() {
-  console.log(chrome);
   fillInRecordedInputs();
 })();
 
 function fillInRecordedInputs() {
-  let fillIns = _fetchFillIns((fillIns) => {
+  _fetchFillIns((fillIns) => {
     fillIns.forEach((data) => _fillInInput(data));
   });
 }
 
 function _fetchFillIns(completion) {
-  chrome.storage.sync.get('test', (items) => {
-    completion(items['test']);
+  let key = window.location.host + window.location.pathname;
+  chrome.storage.sync.get(key, (items) => {
+    let fillIns = items[key] || [];
+    completion(fillIns);
   });
 }
 
