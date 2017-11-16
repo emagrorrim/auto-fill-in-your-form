@@ -3,6 +3,7 @@
   "description": "Auto fill in your form using your saved information",
   "version": "1.0",
   "permissions": [
+    "activeTab",
     "tabs",
     "storage"
   ],
