@@ -1,6 +1,51 @@
-body {
+body, h1, h2 {
   margin: 0;
   padding: 0;
-  background: white;
+}
+
+body {
+  font-family: sans-serif;
+  padding: 20px;
+  background: #1E82E2;
+  border: none;
   overflow: hidden;
+  width: 300px;
+  text-align: center;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: bolder;
+  color: white;
+}
+
+.description {
+  padding: 0 auto;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: lighter;
+  color: white;
+}
+
+.btn {
+  display: inline-block;
+  width: 60%;
+  height: 30px;
+  margin: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  background: white;
+  border-radius: 15px;
+  border: none;
+}
+
+.btn#save-btn {
+  background: white;
+  color: #1E82E2;
+}
+
+.btn#fill-in-btn {
+  background: #1E82E2;
+  color: white;
+  border: 1px white solid;
 }
