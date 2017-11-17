@@ -30,6 +30,10 @@ body {
   color: white;
 }
 
+.big-font {
+  font-size: 17px;
+}
+
 .btn {
   display: inline-block;
   width: 60%;
