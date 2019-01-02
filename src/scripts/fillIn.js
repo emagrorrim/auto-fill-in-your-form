@@ -3,12 +3,12 @@
 })();
 
 function fillInRecordedInputs() {
-  _fetchFillIns((fillIns) => {
-    fillIns.forEach((data) => _fillInInput(data));
+  fetchFillIns((fillIns) => {
+    fillIns.forEach((data) => fillInInput(data));
   });
 }
 
-function _fetchFillIns(completion) {
+function fetchFillIns(completion) {
   let key = window.location.host + window.location.pathname;
   chrome.storage.sync.get(key, (items) => {
     let fillIns = items[key] || [];
@@ -16,16 +16,16 @@ function _fetchFillIns(completion) {
   });
 }
 
-function _fillInInput(data) {
-  let inputs = _getAllTextInputs() || [];
+function fillInInput(data) {
+  let inputs = getAllTextInputs() || [];
   let input = inputs.filter((input) => input.id === data.id)[0] || inputs.filter((input) => input.className === data.class)[0];
-  if (input == null || input == undefined) {
+  if (!input) {
     return;
   }
   input.value = data.value;
 }
 
-function _getAllTextInputs() {
+function getAllTextInputs() {
   let inputs = document.getElementsByTagName("input");
   let textInputs = [];
   for(let i = 0; i < inputs.length; i++) {
