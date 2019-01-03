@@ -20,7 +20,7 @@ function formattedInformation(inputs) {
         return {
             id: input.id,
             name: input.name,
-            className: input.className,
+            class: input.className,
             value: input.value
         }
     });
