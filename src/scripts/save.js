@@ -1,43 +1,34 @@
-(function() {
-  saveFillInsIfNeeded();
+(function () {
+    saveFillInsIfNeeded();
 })();
 
 function saveFillInsIfNeeded() {
-  let inputs = getAllTextInputs();
-  let data = formattedInformation(inputs);
-  if (data !== null && data !== undefined && data.length !== 0) {
-    let key = window.location.host + window.location.pathname;
-    let obj = {};
-    obj[key] = data;
-    chrome.storage.sync.set(obj, () => {
-      alert("Form Saved!")
-    });
-  } else {
-    alert("There is no available text field has value in it, search box and password won't be remember, Sorry for that!");
-  }
+    const inputs = getAllValidateTextInputs();
+    const data = formattedInformation(inputs);
+    if (data && data.length) {
+        const key = window.location.host + window.location.pathname;
+        let obj = {};
+        obj[key] = data;
+        chrome.storage.sync.set(obj, () => alert("Form Saved!"));
+    } else {
+        alert("There is no available text field has value in it, search box and password won't be remember, Sorry for that!");
+    }
 }
 
 function formattedInformation(inputs) {
-  let information = [];
-  inputs.forEach((input) => {
-    let info = {
-      id: input.id,
-      class: input.className,
-      value: input.value
-    };
-    information.push(info);
-  });
-  return information;
+    return inputs.map(input => {
+        return {
+            id: input.id,
+            name: input.name,
+            className: input.className,
+            value: input.value
+        }
+    });
 }
 
-function getAllTextInputs() {
-  let inputs = document.getElementsByTagName('input');
-  let textInputs = [];
-  for(let i = 0; i < inputs.length; i++) {
-    let input = inputs[i];
-    if (input.type === 'text' && !!input) {
-      textInputs.push(input);
-    }
-  }
-  return textInputs;
+function getAllValidateTextInputs() {
+    return []
+        .slice
+        .call(document.querySelectorAll("input[type=text]"))
+        .filter(input => input.value);
 }
