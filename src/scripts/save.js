@@ -18,10 +18,10 @@ function saveFillInsIfNeeded() {
 function formattedInformation(inputs) {
     return inputs.map(input => {
         return {
-            id: input.id,
-            name: input.name,
-            class: input.className,
-            value: input.value
+            id: input.id || "",
+            name: input.name || "",
+            className: input.className || "",
+            value: input.value || ""
         }
     });
 }

@@ -3,7 +3,11 @@
 })();
 
 function fillInRecordedInputs() {
-    fetchFillIns(fillIns => fillIns.forEach(data => fillInInput(dataMigirater(data))));
+    fetchFillIns(fillIns =>
+        fillIns
+            .map(dataMigraterV1_1)
+            .forEach(data => fillInInput(data))
+    );
 }
 
 function fetchFillIns(completion) {
@@ -16,8 +20,9 @@ function fetchFillIns(completion) {
 
 function fillInInput(data) {
     let inputs = getAllTextInputs();
+    console.log(data.id + data.name + data.class);
     inputs
-        .filter(input => (input.id + input.name + input.className) === (data.id + data.name + data.class))
+        .filter(input => (input.id + input.name + input.className).trim() === (data.id + data.name + data.className).trim())
         .forEach(input => input.value = data.value)
 }
 
@@ -27,11 +32,14 @@ function getAllTextInputs() {
         .call(document.querySelectorAll("input[type=text]"))
 }
 
-function dataMigirater(oldData) {
+function dataMigraterV1_1(oldData) {
+    if (oldData.className) {
+        return oldData;
+    }
     return {
         id: oldData.id || "",
         name: oldData.name || "",
-        class: oldData.class || "",
+        className: oldData.class || "",
         value: oldData.value || ""
     }
 }
